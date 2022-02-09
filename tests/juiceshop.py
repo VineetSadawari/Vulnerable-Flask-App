@@ -14,7 +14,7 @@ proxies = {
 
 auth_dict = {'email': 'admin@juice-sh.op', 'password': 'admin123'}
 
-login = requests.post(target_url + '#/login',
+login = requests.post(target_url + '/#/login',
                       proxies=proxies, json=auth_dict, verify=False)
 
 
@@ -26,7 +26,7 @@ if login.status_code == 200:  # if login is successful
     # GET Customer by ID
 
     get_cust_id = requests.get(
-        target_url + '/get/2', proxies=proxies, headers=auth_header, verify=False)
+        target_url + '/#/search', proxies=proxies, headers=auth_header, verify=False)
     if get_cust_id.status_code == 200:
         print("Get Customer by ID Response")
         print(get_cust_id.json())
