@@ -51,7 +51,7 @@ jobs:
       - name: Run Test Automation with ZAP
         run: |
           cd ./tests/
-          python naihorabhai.py
+          python juiceshop.py
       - name: "Upload Report"
         uses: actions/upload-artifact@v1
         with:
