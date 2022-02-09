@@ -1,4 +1,4 @@
-name: ZAP-Test
+name: DVNAPOC
 
 on:
  workflow_dispatch:
