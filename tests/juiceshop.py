@@ -14,7 +14,7 @@ proxies = {
 
 auth_dict = {'email': 'admin@juice-sh.op', 'password': 'admin123'}
 
-login = requests.post(target_url + '/login',
+login = requests.post(target_url + '#/login',
                       proxies=proxies, json=auth_dict, verify=False)
 
 
