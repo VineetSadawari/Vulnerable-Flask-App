@@ -12,7 +12,7 @@ proxies = {
     'https': 'http://127.0.0.1:8090',
 }
 
-auth_dict = {'email': 'admin', 'password': 'password'}
+auth_dict = {'email': 'admin@juice-sh.op', 'password': 'admin123'}
 
 login = requests.post(target_url + '/login',
                       proxies=proxies, json=auth_dict, verify=False)
