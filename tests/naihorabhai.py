@@ -1,10 +1,14 @@
+import requests
 import time
+import datetime
 from pprint import pprint
+from os import getcwd
 from zapv2 import ZAPv2
 
-apiKey = 'changeme'
-target = 'https://public-firing-range.appspot.com'
-zap = ZAPv2(apikey=apiKey, proxies={'http': 'http://127.0.0.1:8080', 'https': 'http://127.0.0.1:8080'})
+# Test Automation Part of the Script
+
+target = 'http://localhost:5050'
+zap = ZAPv2(apikey=apiKey, proxies={'http': 'http://127.0.0.1:8090', 'https': 'http://127.0.0.1:8090'})
 
 # TODO : explore the app (Spider, etc) before using the Active Scan API, Refer the explore section
 print('Active Scanning target {}'.format(target))
@@ -19,3 +23,5 @@ print('Active Scan completed')
 print('Hosts: {}'.format(', '.join(zap.core.hosts)))
 print('Alerts: ')
 pprint(zap.core.alerts(baseurl=target))
+
+zap.core.shutdown()
