@@ -1,8 +1,7 @@
 name: ZAP-Test
 
 on:
-  push: 
-    branches: [ master ]
+ workflow_dispatch:
 
 jobs: 
   build: 
@@ -19,8 +18,8 @@ jobs:
           pip install requests python-owasp-zap-v2.4
       - name: Get working directory
         run: echo $(PWD)
-      - name: Build Image
-        run: docker build -t vulnerable-app .
+      - name: Pull DVNA Image
+        run: docker pull appsecco/dvna
       - name: Install OWASP ZAP
         run: |
           mkdir -p ./zap
@@ -41,8 +40,8 @@ jobs:
           chmod +x start-gui-zap
           chmod +x stop-zap
           echo $pwd
-      - name: Run Docker Container
-        run: docker run -d -p 5050:5050 vulnerable-app
+      - name: Run Docker DVNA
+        run: docker run --name dvna -p 5050:5050 -d appsecco/dvna:sqlite
       - name: Run ZAP Daemon
         run: ./zap/ZAP_2.9.0/zap.sh -daemon -host 0.0.0.0 -port 8090 -config api.addrs.addr.name=".*" -config api.addrs.addr.regex=true -config api.disablekey=true > /dev/null &
       - name: Sleep for a bit
@@ -52,7 +51,7 @@ jobs:
       - name: Run Test Automation with ZAP
         run: |
           cd ./tests/
-          python e2e_zap.py
+          python dvna.py
       - name: "Upload Report"
         uses: actions/upload-artifact@v1
         with:
